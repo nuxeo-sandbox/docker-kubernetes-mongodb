@@ -1,6 +1,6 @@
 # Custom Redis image to use with Kubernetes for a HA deployment
 
-This is a custom HA Redis build forked from https://github.com/Smile-SA/redis-ha and https://github.com/smileisak/docker-images/tree/master/redis
+This is a custom sample HA Redis build forked from https://github.com/Smile-SA/redis-ha and https://github.com/smileisak/docker-images/tree/master/redis ( this image is used by the offical Redis-HA  helm chart).
 
 
 # Licensing
