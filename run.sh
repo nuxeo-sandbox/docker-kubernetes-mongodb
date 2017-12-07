@@ -5,7 +5,7 @@ function launchmaster() {
     echo "Redis master data doesn't exist, data won't be persistent!"
     mkdir /redis-master-data
   fi
-  redis-server /redis-master/redis.conf --protected-mode no
+  redis-server /etc/redis.conf --protected-mode no
 }
 
 # Launch sentinel when `SENTINEL` environment variable is set
@@ -26,7 +26,7 @@ function launchsentinel() {
     sleep 10
   done
 
-  sentinel_conf=sentinel.conf
+  sentinel_conf=/etc/redis-sentinel.conf
 
   echo "sentinel monitor mymaster ${master} 6379 2" > ${sentinel_conf}
   echo "sentinel down-after-milliseconds mymaster 60000" >> ${sentinel_conf}
@@ -55,9 +55,9 @@ function launchslave() {
     echo "Connecting to master failed.  Waiting..."
     sleep 10
   done
-  sed -i "s/%master-ip%/${master}/" /redis-slave/redis.conf
-  sed -i "s/%master-port%/6379/" /redis-slave/redis.conf
-  redis-server /redis-slave/redis.conf --protected-mode no
+  sed -i "s/%master-ip%/${master}/" /etc/redis-slave.conf
+  sed -i "s/%master-port%/6379/" /etc/redis-slave.conf
+  redis-server /etc/redis-slave.conf--protected-mode no
 }
 
 
