@@ -11,7 +11,7 @@ function launchmaster() {
 # Launch sentinel when `SENTINEL` environment variable is set
 function launchsentinel() {
   while true; do
-    master=$(redis-cli -h ${REDIS_SENTINEL_SERVICE_HOST} -p ${REDIS_SENTINEL_SERVICE_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1)
+    master=$(redis-cli -h ${REDIS_SENTINEL_SERVICE_HOST} -p ${REDIS_SENTINEL_SERVICE_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1 | tr -d '"')
     if [[ -n ${master} ]]; then
       master="${master//\"}"
     else
@@ -40,7 +40,7 @@ function launchsentinel() {
 # Launch slave when `SLAVE` environment variable is set
 function launchslave() {
   while true; do
-    master=$(redis-cli -h ${REDIS_SENTINEL_SERVICE_HOST} -p ${REDIS_SENTINEL_SERVICE_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1)
+    master=$(redis-cli -h ${REDIS_SENTINEL_SERVICE_HOST} -p ${REDIS_SENTINEL_SERVICE_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1 |tr -d '"')
     if [[ -n ${master} ]]; then
       master="${master//\"}"
     else
