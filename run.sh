@@ -57,7 +57,7 @@ function launchslave() {
   done
   sed -i "s/%master-ip%/${master}/" /etc/redis-slave.conf
   sed -i "s/%master-port%/6379/" /etc/redis-slave.conf
-  redis-server /etc/redis-slave.conf--protected-mode no
+  redis-server /etc/redis-slave.conf --protected-mode no
 }
 
 
